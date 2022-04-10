@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+<main>
+
+  <div class="album py-5">
+    <div class="container">
+
+      <h2 class="text-center  my-3 py-2 rounded">Fiche produit</h2>
+
+      <div class="row g-3">
+        <div class="col-6 mx-auto">
+          <div class="card shadow-sm p-5">
+            <img src="{{product.image}}" alt="photo">
+
+            <div class="card-body clr4">
+              <h4>{{product.name}}</h4>
+              <h5 class="text-success">Ref No: {{product.referenceNo}}<span>Categorie: {{product.category}}</span></h5>
+              <h5>Couleur: {{product.color}} et <span>Taille: {{product.size}}</span></h5>
+              <h4 class="text-success bold">Prix: {{product.price}}€</h4>
+              <p class="card-text">{{product.description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+             
+                  <a href="{{path('cart_add', {'id' : product.id})}}" class=" text-success m-1"><i class="bi bi-basket-fill fs-5 rounded px-1"></i></a>
+                  {# <a href="{{path('accueil')}}" class="btn btn-sm btn-outline-success m-1">Passer commande</a> #}
+                  <a href="{{path('checkout')}}" class="btn btn-sm btn-outline-success m-1">Passer commande</a>
+                </div>
+                     <a href="{{path('accueil')}}" class="btn btn-sm btn-outline-success m-1">Retour à l'accueil'</a>
+               
+              </div>
+               <small class="text-muted">Commandez vite ! Dernières pièces disponibles.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock %}

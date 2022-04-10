@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page sacs!{% endblock %}
+
+{% block body %}
+<style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+<main>
+
+  <div class="album py-5">
+    <div class="container">
+
+   <h2 class="text-center  my-3 py-2 rounded">Collection de Sacs</h2>
+            <p>Notre sac ne nous quitte jamais et c'est l'une des premières choses que l'on remarque sur un look. Il convient donc de le choisir sans aucune faute!</p>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for item in products %}
+        <div class="col">
+          <div class="card shadow-sm">
+         <img src="{{item.image}}" style="height: 225px; width: auto; margin: auto;padding-top: 25px;" alt="photo">
+
+            <div class="card-body clr4">
+              <h4>{{item.name}}</h4>
+         
+              <h4 class="text-success bold">Prix: {{item.price}}€</h4>
+              <p class="card-text">{{item.description}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{{path('show',{'id': item.id})}}" class="btn btn-sm btn-outline-success m-1">Détails</a>
+                   <a href="{{path('favorite_add', {'id' : item.id})}}" class="text-success m-1"><i class="bi bi-heart-fill fs-5  rounded px-1"></i></a>
+                   <a href="{{path('cart_add', {'id' : item.id})}}" class="text-success m-1"><i class="bi bi-basket-fill fs-5  rounded px-1"></i></a>
+
+                </div>
+                {# <small class="text-muted">9 mins</small> #}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock %}

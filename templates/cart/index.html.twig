@@ -1,0 +1,209 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier | Icône Nature{% endblock %}
+
+{% block body %}
+
+<style>
+/* Style pour la page concernée */
+    body{margin-top:20px;
+    background:#eee;
+}
+h3 {
+    font-size: 16px;
+}
+.text-navy {
+    color: #1ab394;
+}
+.cart-product-imitation {
+  text-align: center;
+  padding-top: 30px;
+  height: 80px;
+  width: 80px;
+  background-color: #f8f8f9;
+}
+.product-imitation.xl {
+  padding: 120px 0;
+}
+.product-desc {
+  padding: 20px;
+  position: relative;
+}
+.ecommerce .tag-list {
+  padding: 0;
+}
+.ecommerce .fa-star {
+  color: #d1dade;
+}
+.ecommerce .fa-star.active {
+  color: #f8ac59;
+}
+.ecommerce .note-editor {
+  border: 1px solid #e7eaec;
+}
+table.shoping-cart-table {
+  margin-bottom: 0;
+}
+table.shoping-cart-table tr td {
+  border: none;
+  text-align: right;
+}
+table.shoping-cart-table tr td.desc,
+table.shoping-cart-table tr td:first-child {
+  text-align: left;
+}
+table.shoping-cart-table tr td:last-child {
+  width: 80px;
+}
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+.ibox.collapsed .ibox-content {
+  display: none;
+}
+.ibox:after,
+.ibox:before {
+  display: table;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 15px 20px 20px 20px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="ibox">
+           <div class="ibox-title container text-center  mt-5 mb-3 p-4">
+                    {# <span class="pull-right">(<strong>5</strong>) items</span> #}
+                    <h5>Votre Panier</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        {% if items | length > 0 %}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Prix</th>
+                                        <th>Quantité</th>
+                                        <th>Total</th>
+                                        <th>Supprimer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                    <tr>
+                                        <td scope="row">{{item.product.name}}</td>
+                                        <td>{{item.product.price}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{ item.product.price * item.quantity }}</td>
+                                        <td>
+                                            <a href="{{path('cart_remove', {'id' : item.product.id})}}" class="btn-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/></svg></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            
+                        {% else %}
+                        <h3>Votre panier est vide</h3> 
+                        {% endif %}
+                    </div>
+
+                </div>
+                
+                <div class="ibox-content">
+                    <a href="https://buy.stripe.com/test_14k6pkb7Y9RubJK3cc" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Procéder au paiment</a>
+                    {# <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i> Checkout</button> #}
+                    <a href="{{path('accueil')}}" class="btn btn-outline-success">Continuer vos achats</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Votre Panier</h5>
+                </div>
+                <div class="ibox-content">
+                    <span>
+                        Total
+                    </span>
+                    <h2 class="font-bold">
+                    {{total}}€
+                    </h2>
+
+                    <hr>
+                    {# <span class="text-muted small">
+                        *For United States, France and Germany applicable sales tax will be applied
+                    </span> #}
+                    <div class="m-t-sm">
+                        <div class="btn-group">
+                        <a href="https://buy.stripe.com/test_14k6pkb7Y9RubJK3cc" class="btn btn-success btn-sm"><i class="fa fa-shopping-cart"></i>PAYER</a>
+                     
+                            <a href="{{path('cancel_url')}}" class="btn btn-danger btn-sm"><i class="fa fa-shopping-cart"></i>Annuler l'achat</a>
+                   
+                        </div>
+                            
+                    </div>
+                     <span class="text-muted small">Appliquez un code de coupon, à l'étape suivante.</span>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>SAV</h5>
+                </div>
+                <div class="ibox-content text-center">
+                    <h3><i class="fa fa-phone"></i> +33123456789 </h3>
+                    <span class="small">
+                      Service téléphonique
+                      <br>
+                        Du lundi au vendredi : 9:00-17:00
+                    </span>
+                </div>
+            </div>
+
+          
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+

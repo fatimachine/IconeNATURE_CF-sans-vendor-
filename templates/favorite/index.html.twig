@@ -1,0 +1,183 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes favoris{% endblock %}
+
+{% block body %}
+<style>
+    body{margin-top:20px;
+    background:#eee;
+}
+h3 {
+    font-size: 16px;
+}
+.text-navy {
+    color: #1ab394;
+}
+.cart-product-imitation {
+  text-align: center;
+  padding-top: 30px;
+  height: 80px;
+  width: 80px;
+  background-color: #f8f8f9;
+}
+.product-imitation.xl {
+  padding: 120px 0;
+}
+.product-desc {
+  padding: 20px;
+  position: relative;
+}
+.ecommerce .tag-list {
+  padding: 0;
+}
+.ecommerce .fa-star {
+  color: #d1dade;
+}
+.ecommerce .fa-star.active {
+  color: #f8ac59;
+}
+.ecommerce .note-editor {
+  border: 1px solid #e7eaec;
+}
+table.shoping-cart-table {
+  margin-bottom: 0;
+}
+table.shoping-cart-table tr td {
+  border: none;
+  text-align: right;
+}
+table.shoping-cart-table tr td.desc,
+table.shoping-cart-table tr td:first-child {
+  text-align: left;
+}
+table.shoping-cart-table tr td:last-child {
+  width: 80px;
+}
+.ibox {
+  clear: both;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding: 0;
+}
+.ibox.collapsed .ibox-content {
+  display: none;
+}
+.ibox:after,
+.ibox:before {
+  display: table;
+}
+.ibox-title {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #ffffff;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 3px 0 0;
+  color: inherit;
+  margin-bottom: 0;
+  padding: 14px 15px 7px;
+  min-height: 48px;
+}
+.ibox-content {
+  background-color: #ffffff;
+  color: inherit;
+  padding: 15px 20px 20px 20px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+}
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid #e7eaec;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+</style>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title container text-center  mt-5 mb-3 p-4">
+                    {# <span class="pull-right">(<strong>5</strong>) items</span> #}
+                    <h3>Vos articles favoris : <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-hearts text-danger" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M4.931.481c1.627-1.671 5.692 1.254 0 5.015-5.692-3.76-1.626-6.686 0-5.015Zm6.84 1.794c1.084-1.114 3.795.836 0 3.343-3.795-2.507-1.084-4.457 0-3.343ZM7.84 7.642c2.71-2.786 9.486 2.09 0 8.358-9.487-6.268-2.71-11.144 0-8.358Z"/>
+</svg> </h3>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        {% if items | length > 0 %}
+                            <table class="table table-dark table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Produit</th>
+                                        <th>Ref no:</th>
+                                        <th>Couleur:</th>
+                                        <th>Taille:</th>
+                                        <th>Prix:</th>
+                                        <th>Quantité:</th>
+                                        <th>Total</th>
+                                        <th>Supprimer</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                    <tr>
+                                        <td scope="row">{{item.product.name}}</td>
+                                        <td>{{item.product.referenceNo}}</td>
+                                        <td>{{item.product.color}}</td>
+                                        <td>{{item.product.size}}</td>
+                                        <td>{{item.product.price}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{ item.product.price * item.quantity }}</td>
+                                        <td>
+                                            <a href="{{path('favorite_remove', {'id' : item.product.id})}}" class="btn-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/></svg></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" class="text-end fw-bold">Total : </td>
+                                        <td class="text-center fw-bold">{{total}}</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                                  <div class="ibox-content">
+                    <a href="{{path('checkout')}}" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Passer au Paiement</a>
+                    <a href="{{path('accueil')}}" class="btn btn-outline-success">Continuer vos achats</a>
+                </div>
+                        {% else %}
+                    <div class="ibox-content">
+
+                      <h3>OOPS !VOUS N’AVEZ PAS ENCORE D’ARTICLE(S) FAVORIS</h3> 
+
+                    <a href="{{path('accueil')}}" class="btn btn-outline-success">Retour à l'accueil </a>
+                </div>
+                    
+
+                        {% endif %}
+                    </div>
+
+                </div>
+                
+          
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+</div>
+{% endblock %}
+

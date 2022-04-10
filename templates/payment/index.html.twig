@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page paiement{% endblock %}
+
+{% block body %}
+
+ {# <div class="ibox-title container text-center  mt-5 mb-3 p-4">
+
+</div> #}
+
+
+    <form action="/checkout" method="POST"> 
+   
+    <a href="https://buy.stripe.com/test_14k6pkb7Y9RubJK3cc"><button type="submit" class="btn btn-success btn-lg">Payer</button></a>
+    </form>
+
+<div>
+
+</div>
+{% endblock %}

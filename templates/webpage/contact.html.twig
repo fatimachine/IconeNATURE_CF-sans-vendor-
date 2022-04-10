@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Contactez-nous - Icône Nature{% endblock %}
+
+{% block body %}
+
+ <div class="ibox-title container   mt-5 mb-3 p-4">
+
+  <div class="row m-2">
+    <h1 class="text-center my-2 mx-4 py-1  rounded-2 Small shadow">Contactez-nous</h1>
+    <div class="col-5  pt-5 py-2   mx-auto  rounded-3 Small shadow">
+      <p>Vous avez une question concernant votre commande, nos créations ou autre ? </p>
+
+      <p>N'hésitez pas à remplir le formulaire ci-dessous, ou par email à info@iconenature.com</p>
+
+      <p>Vous obtiendrez une réponse sous 24H maximum.</p>
+    
+    <ul>
+      <li>Pour simplifier le traitement de votre demande, quel que soit le moyen de contact, merci de bien vouloir nous indiquer dans le mail  : </li>
+      <li>Numéro de commande : #ABXXCXXX</li>
+      <li>Objet de la demande : (Colis non reçu, colis cassé, partenariat, changement de nom ou adresse, demande de remboursement ..)</li>
+    </ul>
+    </div>
+
+
+    <div class="col-6 border mx-auto p-3 bg-dark text-white rounded-3 Small shadow">
+      {{ form_start(form) }}
+       <div class="form-group">
+          {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      {# <div class="form-group">
+          {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
+      </div> #}
+      <div class="form-group">
+          {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+          {{ form_row(form.message, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+          <input type="submit" value="Envoyer" class="btn btn-outline-success btn-sm text-white">
+      </div>
+      {{ form_end(form) }}
+    </div>
+   
+  </div>
+</div>
+{% endblock %}
